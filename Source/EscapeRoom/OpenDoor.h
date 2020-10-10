@@ -26,5 +26,8 @@ public:
 private:
 	float InitialYaw;
 	float CurrentYaw;
-	float TargetYaw = -90.f;
+
+	// This unlocks "TargetYaw" property in UE editor when clicking OpenDoor Actor Component
+	UPROPERTY(EditAnywhere)
+	float TargetYaw = -30.f;
 };
