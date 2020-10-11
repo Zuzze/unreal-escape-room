@@ -29,7 +29,8 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *GetOwner()->GetActorRotation().ToString());
 	UE_LOG(LogTemp, Warning, TEXT("Yaw is %f"), GetOwner()->GetActorRotation().Yaw);
 
-	CurrentYaw = FMath::Lerp(CurrentYaw, TargetYaw, 0.02f);
+	// Adding DeltaTime, it is ensured that the time is same regardless of computer and framerate
+	CurrentYaw = FMath::Lerp(CurrentYaw, TargetYaw, DeltaTime * 2.f);
 	FRotator DoorRotation = GetOwner()->GetActorRotation();
 	DoorRotation.Yaw = CurrentYaw;
 	GetOwner()->SetActorRotation(DoorRotation);
