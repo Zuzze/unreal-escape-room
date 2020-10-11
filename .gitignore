@@ -79,6 +79,7 @@ DerivedDataCache/*
 # Starter Content Ignored
 
 Content/StarterContent/*
+Content/MedievalDungeon/*
 
 VSCode Files
 /.vscode/*
