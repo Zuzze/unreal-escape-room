@@ -30,9 +30,12 @@ private:
 
 	void Grab();
 	void Release();
-	FHitResult GetFirstPhysicsBodyInReach() const;
 	void FindPhysicsHandle();
 	void SetupInputComponent();
+
+	FHitResult GetFirstPhysicsBodyInReach() const;
+	FVector GetPlayerReach() const;
+	FVector GetPlayerWorldPosition() const;
 
 	// Debugging
 	// void DebugGrab(FVector *PlayerViewPointLocation, FRotator *PlayerViewPointRotation, FVector *LineTraceEnd);
