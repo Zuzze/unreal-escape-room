@@ -18,6 +18,11 @@ void UOpenDoor::BeginPlay()
 	InitialYaw = GetOwner()->GetActorRotation().Yaw;
 	CurrentYaw = InitialYaw;
 	TargetYaw += TargetYaw;
+
+	if (!PressurePlate)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s has the open door component on it, but no pressure plate set to trigger it"), *GetOwner()->GetName())
+	}
 }
 
 // Called every frame
@@ -25,9 +30,17 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (PressurePlate && PressurePlate->IsOverlappingActor(ActorThatOpens))
+	{
+		OpenDoor(DeltaTime);
+	}
 	// In unreal x = roll, y = pitch, z = yaw
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *GetOwner()->GetActorRotation().ToString());
-	UE_LOG(LogTemp, Warning, TEXT("Yaw is %f"), GetOwner()->GetActorRotation().Yaw);
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), *GetOwner()->GetActorRotation().ToString());
+	//UE_LOG(LogTemp, Warning, TEXT("Yaw is %f"), GetOwner()->GetActorRotation().Yaw);
+}
+
+void UOpenDoor::OpenDoor(float DeltaTime)
+{
 
 	// Adding DeltaTime, it is ensured that the time is same regardless of computer and framerate
 	CurrentYaw = FMath::Lerp(CurrentYaw, TargetYaw, DeltaTime * 2.f);

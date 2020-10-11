@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Engine/TriggerVolume.h"
 #include "OpenDoor.generated.h"
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
@@ -18,6 +19,7 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+	void OpenDoor(float DeltaTime);
 
 public:
 	// Called every frame
@@ -30,4 +32,10 @@ private:
 	// This unlocks "TargetYaw" property in UE editor when clicking OpenDoor Actor Component
 	UPROPERTY(EditAnywhere)
 	float TargetYaw = -30.f;
+
+	UPROPERTY(EditAnywhere)
+	ATriggerVolume *PressurePlate;
+
+	UPROPERTY(EditAnywhere)
+	AActor *ActorThatOpens;
 };
