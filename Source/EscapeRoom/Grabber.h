@@ -26,7 +26,11 @@ private:
 	float Reach = 100.0f; // in cm
 
 	// avoid null pointer issues by initializing values
+	// If starts with "U", shoudl have also UPROPERTY according to UE docs
+	UPROPERTY()
 	UPhysicsHandleComponent *PhysicsHandle = nullptr;
+
+	UPROPERTY()
 	UInputComponent *InputComponent = nullptr;
 
 	void Grab();
