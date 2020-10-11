@@ -20,6 +20,7 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 	void OpenDoor(float DeltaTime);
+	void CloseDoor(float DeltaTime);
 
 public:
 	// Called every frame
@@ -31,7 +32,18 @@ private:
 
 	// This unlocks "TargetYaw" property in UE editor when clicking OpenDoor Actor Component
 	UPROPERTY(EditAnywhere)
-	float TargetYaw = -40.f;
+	float DoorOpenAngle = -40.0f;
+
+	UPROPERTY(EditAnywhere)
+	float DoorOpeningSpeed = 0.8f;
+
+	UPROPERTY(EditAnywhere)
+	float DoorClosingSpeed = 2.0f;
+
+	UPROPERTY(EditAnywhere)
+	float DoorCloseDelay = 0.8f; // seconds
+
+	float DoorLastOpened = 0.0f;
 
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume *PressurePlate;
