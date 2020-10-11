@@ -25,6 +25,7 @@ protected:
 private:
 	float Reach = 100.0f; // in cm
 
+	// avoid null pointer issues by initializing values
 	UPhysicsHandleComponent *PhysicsHandle = nullptr;
 	UInputComponent *InputComponent = nullptr;
 

@@ -27,7 +27,7 @@ void UOpenDoor::BeginPlay()
 		UE_LOG(LogTemp, Error, TEXT("%s has the open door component on it, but no pressure plate set to trigger it"), *GetOwner()->GetName())
 	}
 
-	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
+	// ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
 // Called every frame
@@ -82,6 +82,10 @@ float UOpenDoor::TotalMassOfActors() const
 
 	// find all actors that overlap with pressure plate
 	TArray<AActor *> OverlappingActors;
+	if (!PressurePlate)
+	{
+		return MassOfPressurePlateItemsKg;
+	}
 	PressurePlate->GetOverlappingActors(OverlappingActors);
 
 	// same as let .. of in js

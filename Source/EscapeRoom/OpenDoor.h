@@ -47,10 +47,10 @@ private:
 	float DoorLastOpened = 0.0f;
 
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume *PressurePlate;
+	ATriggerVolume *PressurePlate = nullptr;
 
-	UPROPERTY(EditAnywhere)
-	AActor *ActorThatOpens;
+	// UPROPERTY(EditAnywhere)
+	// AActor *ActorThatOpens;
 
 	UPROPERTY(EditAnywhere)
 	float MassNeededToOpenDoorKg = 40.0f;
