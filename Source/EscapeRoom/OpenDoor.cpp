@@ -1,8 +1,9 @@
 // Copyright zuzze.tech 2020
 
+#include "OpenDoor.h"
+#include "Components/PrimitiveComponent.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
-#include "OpenDoor.h"
 #include "GameFramework/Actor.h"
 
 // Sets default values for this component's properties
@@ -34,7 +35,8 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (PressurePlate && PressurePlate->IsOverlappingActor(ActorThatOpens))
+	//if (PressurePlate && PressurePlate->IsOverlappingActor(ActorThatOpens))
+	if (TotalMassOfActors() > MassNeededToOpenDoorKg)
 	{
 		OpenDoor(DeltaTime);
 		DoorLastOpened = GetWorld()->GetTimeSeconds();
@@ -72,4 +74,20 @@ void UOpenDoor::CloseDoor(float DeltaTime)
 	FRotator DoorRotation = GetOwner()->GetActorRotation();
 	DoorRotation.Yaw = CurrentYaw;
 	GetOwner()->SetActorRotation(DoorRotation);
+}
+
+float UOpenDoor::TotalMassOfActors() const
+{
+	float MassOfPressurePlateItemsKg = 0.f;
+
+	// find all actors that overlap with pressure plate
+	TArray<AActor *> OverlappingActors;
+	PressurePlate->GetOverlappingActors(OverlappingActors);
+
+	// same as let .. of in js
+	for (AActor *Actor : OverlappingActors)
+	{
+		MassOfPressurePlateItemsKg += Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
+	}
+	return MassOfPressurePlateItemsKg;
 }

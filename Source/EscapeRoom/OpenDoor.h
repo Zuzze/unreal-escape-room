@@ -21,6 +21,7 @@ protected:
 	virtual void BeginPlay() override;
 	void OpenDoor(float DeltaTime);
 	void CloseDoor(float DeltaTime);
+	float TotalMassOfActors() const;
 
 public:
 	// Called every frame
@@ -50,4 +51,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	AActor *ActorThatOpens;
+
+	UPROPERTY(EditAnywhere)
+	float MassNeededToOpenDoorKg = 40.0f;
 };
