@@ -31,7 +31,7 @@ private:
 
 	// This unlocks "TargetYaw" property in UE editor when clicking OpenDoor Actor Component
 	UPROPERTY(EditAnywhere)
-	float TargetYaw = -30.f;
+	float TargetYaw = -40.f;
 
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume *PressurePlate;
