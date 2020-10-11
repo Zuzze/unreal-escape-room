@@ -36,12 +36,13 @@ void UGrabber::BeginPlay()
 	InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
 	if (InputComponent)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Input comp found on %s"), *GetOwner()->GetName());
+		//UE_LOG(LogTemp, Warning, TEXT("Input comp found on %s"), *GetOwner()->GetName());
 
 		// IE = Input event set in Unreal: Edit -> project settings -> Engine -> Input
 		// Name "Grab" must be exactly same as the one set in project settings
 		// this refers to this points to this obj, not to this class
 		InputComponent->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+		InputComponent->BindAction("Grab", IE_Released, this, &UGrabber::Release);
 	}
 	else
 	{
@@ -51,7 +52,12 @@ void UGrabber::BeginPlay()
 
 void UGrabber::Grab()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Grabber Press"));
+	UE_LOG(LogTemp, Warning, TEXT("Grab Pressed"));
+}
+
+void UGrabber::Release()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Grab Released"));
 }
 
 // Called every frame
