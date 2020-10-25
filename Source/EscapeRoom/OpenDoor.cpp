@@ -54,6 +54,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 void UOpenDoor::OpenDoor(float DeltaTime)
 {
 
+	UE_LOG(LogTemp, Warning, TEXT("Open DOOR"));
 	// Adding DeltaTime, it is ensured that the time is same regardless of computer and framerate
 	CurrentYaw = FMath::Lerp(CurrentYaw, DoorOpenAngle, DeltaTime * DoorOpeningSpeed);
 	FRotator DoorRotation = GetOwner()->GetActorRotation();
@@ -99,6 +100,7 @@ void UOpenDoor::CloseDoor(float DeltaTime)
 
 float UOpenDoor::TotalMassOfActors() const
 {
+	UE_LOG(LogTemp, Warning, TEXT("Checking mass of pressure plate items to open the door"));
 	float MassOfPressurePlateItemsKg = 0.f;
 
 	// find all actors that overlap with pressure plate
@@ -114,6 +116,7 @@ float UOpenDoor::TotalMassOfActors() const
 	{
 		MassOfPressurePlateItemsKg += Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
 	}
+	UE_LOG(LogTemp, Warning, TEXT("%f"), MassOfPressurePlateItemsKg);
 	return MassOfPressurePlateItemsKg;
 }
 
