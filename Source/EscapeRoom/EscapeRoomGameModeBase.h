@@ -7,7 +7,7 @@
 #include "EscapeRoomGameModeBase.generated.h"
 
 /**
- * 
+ * This is the custom default Gamemode base for escape room
  */
 UCLASS()
 class ESCAPEROOM_API AEscapeRoomGameModeBase : public AGameModeBase
